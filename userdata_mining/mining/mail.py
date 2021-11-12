@@ -31,12 +31,12 @@ def postprocess(text: str) -> str:
     :param {str} text - The message text
     """
     text = text.encode('ascii', 'ignore').decode()
-    text = re.sub('http\S+', '', text, flags=re.MULTILINE)
+    text = re.sub(r'http\S+', '', text, flags=re.MULTILINE)
     s = MLStripper()
     try:
         s.feed(text)
         return " ".join(re.findall("[a-zA-Z]+", s.get_data()))
-    except:
+    except Exception:
         return ""
 
 
@@ -114,14 +114,16 @@ def parse_mail_data(user, data_path='.'):
     Parses a user's email data in mbox format. If cache exists, returns None.
 
     :param {str} user - The user directory.
-    :param {str} data_path - Path to the data/ directory, without the trailing /.
+    :param {str} data_path - Path to the data/ directory, without
+                the trailing /.
     :return {list} A list of messages
     """
     # First, check for cache
     if os.path.exists(f'{data_path}/saved/embeddings/mail.pickle'):
         return None
 
-    path = f'{data_path}/data/{user}/Takeout/Mail/All mail Including Spam and Trash.mbox'
+    path = f'{data_path}/data/{user}/Takeout/Mail/' + \
+        'All mail Including Spam and Trash.mbox'
 
     # Check if path exists
     if not os.path.exists(path):
@@ -133,7 +135,7 @@ def parse_mail_data(user, data_path='.'):
     for message in box:
         message_obj = GmailMboxMessage(message)
         parsed_mail = message_obj.parse_email()
-        if parsed_mail != [] and not re.match('\s+', parsed_mail):
+        if parsed_mail != [] and not re.match(r'\s+', parsed_mail):
             messages.append(parsed_mail)
 
     return messages

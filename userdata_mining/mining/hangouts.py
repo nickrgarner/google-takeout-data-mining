@@ -32,9 +32,11 @@ def parse_hangouts_data(user, data_path='.'):
     messages = []
 
     for conversation in conversations:
-        content = [x['chat_message']['message_content'].get('segment', [{'type': 'foo'}])
+        content = [x['chat_message']['message_content'].get('segment',
+                                                            [{'type': 'foo'}])
                    for x in conversation if 'chat_message' in x]
-        segments = [[y['text'].encode('ascii', 'ignore').decode('ascii') for y in x if y['type'] == 'TEXT']
+        segments = [[y['text'].encode('ascii', 'ignore').decode('ascii')
+                    for y in x if y['type'] == 'TEXT']
                     for x in content]
         segments = np.array(segments)
 

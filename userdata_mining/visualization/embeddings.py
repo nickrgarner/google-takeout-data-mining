@@ -7,7 +7,8 @@ import matplotlib.pyplot as plt
 
 class EmbeddingVisualizer(Visualizer):
     """
-    Visualizes the embeddings of the data along with an optional reference point.
+    Visualizes the embeddings of the data along with an optional reference
+    point.
     """
 
     def __init__(self, embedding_dims=2):
@@ -48,7 +49,8 @@ class EmbeddingVisualizer(Visualizer):
         ivis = Ivis(embedding_dims=self.embedding_dims, k=k, batch_size=2)
         return ivis.fit_transform(arg)
 
-    def visualize(self, *args, alpha=0.7, titles=None, reference=None, **fig_kwargs):
+    def visualize(self, *args, alpha=0.7, titles=None, reference=None,
+                  **fig_kwargs):
         """
         Visualizes the data given.
 

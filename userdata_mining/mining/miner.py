@@ -150,13 +150,13 @@ class GoogleDataMiner(DataMiner):
                 embedding.embed(x) for x in hangouts_data]
             self.messages_embeddings = [
                 x for x in self.messages_embeddings if x is not None]
-            
+
             # Cache embeddings
             with open(f'{self.data_path}/saved/embeddings/hangouts.pickle', 'wb') as f:
                 pickle.dump(self.messages_embeddings, f)
         else:
             self.messages_embeddings = []
-        
+
         if chats_data:
             info('Embedding Google Chat data. This may take a while.')
             self.chats_embeddings = [
@@ -210,7 +210,7 @@ class GoogleDataMiner(DataMiner):
             (self.nearby_places_embeddings, self.maps_places_embeddings))
 
         if apps_data is None:
-            #Load cached embeddings
+            # Load cached embeddings
             with open(f'{self.data_path}/saved/embeddings/apps.pickle', 'rb') as f:
                 self.apps_embeddings = pickle.load(f)
 

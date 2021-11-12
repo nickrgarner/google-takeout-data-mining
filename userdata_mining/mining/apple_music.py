@@ -5,7 +5,7 @@ import pandas as pd
 
 def parse_tv_data(user, data_path='.'):
     """
-    Mines a user's app store clicks. 
+    Mines a user's app store clicks.
 
     :param {str} user - The user directory.
     :param {str} data_path - Path to the data/ directory, NOT ending in a /.

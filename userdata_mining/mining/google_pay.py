@@ -19,7 +19,8 @@ def parse_pay_data(user, data_path='.'):
     if os.path.exists(f'{data_path}/saved/embeddings/pay.pickle'):
         return None
 
-    path = f'{data_path}/data/{user}/Takeout/Google Pay/Google transactions/transactions_*.csv'
+    path = f'{data_path}/data/{user}/Takeout/Google Pay/' + \
+        'Google transactions/transactions_*.csv'
 
     # Does the directory exist?
     if not os.path.exists(path):
@@ -31,7 +32,8 @@ def parse_pay_data(user, data_path='.'):
         with open(file, 'r') as f:
             read = csv.reader(f)
             for r in read:
-                if r is not None and len(r) > 0 and r[2] != '' and r[2] != 'Description':
+                if r is not None and len(r) > 0 and r[2] != '' and \
+                   r[2] != 'Description':
                     transaction_descriptions.append(r[2])
 
     transaction_descriptions = set(transaction_descriptions)

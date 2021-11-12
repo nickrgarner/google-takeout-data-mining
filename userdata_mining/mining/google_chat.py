@@ -4,7 +4,6 @@ import os
 from userdata_mining.utils import warn
 
 
-
 def parse_chats_data(user, data_path='.'):
     """
     Parse the chat data of a user.
